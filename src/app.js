@@ -18,10 +18,7 @@ app.use(express.json());
 
 // 2. Rutterna
 app.get('/', (req, res) => {
-  res.json({
-    message: 'Välkommen till restaurangen!',
-    endpoints: ['/dishes', '/orders', '/orders/stats', '/orders/export', '/menu.txt'],
-  });
+  res.sendFile(path.join(filesDir, 'index.html'));
 });
 
 // En hel fil till klienten: sendFile streamar den och sätter Content-Type åt oss

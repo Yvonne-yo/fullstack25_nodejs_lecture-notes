@@ -17,6 +17,8 @@ export function validateDish(body = {}, { partial = false } = {}) {
   const errors = [];
   const { name, price, category } = body;
 
+  console.log(name,price,category)
+
   if (!partial || name !== undefined) {
     if (typeof name !== 'string' || name.trim() === '') {
       errors.push('name måste vara en text');

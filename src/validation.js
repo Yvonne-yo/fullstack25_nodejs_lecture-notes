@@ -11,6 +11,10 @@ export function parseId(value) {
   return id;
 }
 
+export function isText(value) {
+  return typeof value === 'string' && value.trim() !== '';
+}
+
 // Returnerar en lista med fel. Tom lista = allt är ok.
 // partial: true används vid PATCH, då är alla fält valfria men måste vara rätt om de skickas.
 export function validateDish(body = {}, { partial = false } = {}) {

@@ -1,6 +1,8 @@
+import jwt from 'jsonwebtoken'
+
 // Bokningskontrollen: släpper bara in den som skickar rätt nyckel i headern x-api-key.
 // Används bara på de rutter som ändrar något, inte globalt.
-export function requireApiKey(req, res, next) {
+export function apiKey(req, res, next) {
   if (!process.env.API_KEY) {
     // Serverns fel, inte klientens: .env saknar nyckeln. errorHandler svarar 500.
     return next(new Error('API_KEY saknas i .env'));
@@ -11,4 +13,20 @@ export function requireApiKey(req, res, next) {
   }
 
   next();
+}
+
+export function userPassword(req, res, next){
+  const header = req.get('Authorization') ?? '';
+  const [scheme, token] = header.split(' ');
+
+  if (scheme !== 'Bearer' || !token) {
+    return res.status(401).json({ error: 'Fel uppgifter' });
+  }
+
+  try {
+    req.user = jwt.verify(token, 'password');
+    next();
+  } catch(err){
+    res.status(401).json({ error: 'Fel uppgifter' });
+  }
 }

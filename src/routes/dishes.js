@@ -1,6 +1,6 @@
 import express from 'express';
 import * as controller from '../controllers/dishesController.js';
-import { apiKey } from '../middleware/authorization.js';
+import * as authorization from '../middleware/authorization.js';
 
 const router = express.Router();
 

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import { logger } from './middleware/logger.js';
-import { userPassword } from './middleware/authorization.js'
+import * as authorization from './middleware/authorization.js'
 import { notFound, errorHandler } from './middleware/errors.js';
 import dishesRouter from './routes/dishes.js';
 import ordersRouter from './routes/orders.js';
@@ -74,7 +74,7 @@ app.post('/login', async (req,res) => {
 })
 
 
-app.get('/user', userPassword, async (req, res) => {
+app.get('/user', authorization.byPassword, async (req, res) => {
   try {
     const userData = await specificUser(req.user.id)
     res.status(200).json(userData);

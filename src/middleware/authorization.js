@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 // Bokningskontrollen: släpper bara in den som skickar rätt nyckel i headern x-api-key.
 // Används bara på de rutter som ändrar något, inte globalt.

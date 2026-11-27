@@ -33,3 +33,7 @@ export async function specificUser(id) {
 export async function findUser(username) {
   return User.findOne({ username });
 }
+
+export async function register(username, password) {
+  return User.create({ username, password })
+}

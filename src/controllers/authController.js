@@ -9,7 +9,8 @@ export const registerUser = async (req, res) => {
     return res.status(400).json({ error: 'Fyll i namn och lösenord' });
   }
   try {
-    const user = await register(username, password);
+    const hash = await bcrypt.hash(password, 10);
+    const user = await register(username, hash);
     res.status(201).json({ id: user.id, username: user.username });
   } catch (err) {
     console.error(err);

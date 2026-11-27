@@ -19,7 +19,7 @@ export async function readDish(id) {
 
 export async function updateDish(id, dish) {
   console.log(id, dish);
-  return Dish.findByIdAndUpdate(id, dish, { new: true });
+  return Dish.findByIdAndUpdate(id, dish, { new: true, runValidators: true });
 }
 
 export async function deleteDish(id) {
@@ -34,6 +34,14 @@ export async function findUser(username) {
   return User.findOne({ username });
 }
 
-export async function register(username, password) {
-  return User.create({ username, password })
+export async function allUsers(){
+    return User.find();
+}
+
+export async function register(username, password, role) {
+  return User.create({ username, password, role })
+}
+
+export async function updateUserById(id, user){
+  return User.findByIdAndUpdate(id, user, { new: true, runValidators: true })
 }
